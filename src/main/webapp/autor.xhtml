@@ -11,17 +11,19 @@
 </h:head>
 <h:body>
     <h1>Novo autor</h1>
-    <h:message for="nome"/>
     <h:form>
         <fieldset>
             <legend>Dados do autor</legend>
-            <h:panelGrid columns="2">
+            <h:panelGrid columns="3">
                 <h:outputLabel for="nome" value="Nome"/>
-                <h:inputText id="nome" value="#{autorBean.autor.name}" required="true" requiredMessage="Nome não informado" validatorMessage="Autor deve ter no minino 5 caracteres">
+                <h:inputText id="nome" value="#{autorBean.autor.name}" required="true"
+                             requiredMessage="Nome não informado"
+                             validatorMessage="Autor deve ter no minino 5 caracteres">
                     <f:validateLength minimum="5"/>
                 </h:inputText>
-                <h:commandButton value="Gravar" action="#{autorBean.gravar}"/>
+                <h:message for="nome"/>
             </h:panelGrid>
+            <h:commandButton value="Gravar" action="#{autorBean.gravar}"/>
         </fieldset>
     </h:form>
 </h:body>
