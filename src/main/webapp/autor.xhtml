@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Novo autor</title>
+</h:head>
+<h:body>
+    <h1>Novo autor</h1>
+    <h:message for="nome"/>
+    <h:form>
+        <fieldset>
+            <legend>Dados do autor</legend>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="nome" value="Nome"/>
+                <h:inputText id="nome" value="#{autorBean.autor.name}" required="true" requiredMessage="Nome não informado" validatorMessage="Autor deve ter no minino 5 caracteres">
+                    <f:validateLength minimum="5"/>
+                </h:inputText>
+                <h:commandButton value="Gravar" action="#{autorBean.gravar}"/>
+            </h:panelGrid>
+        </fieldset>
+    </h:form>
+</h:body>
+
+</html>
