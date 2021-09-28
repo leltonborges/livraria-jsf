@@ -39,7 +39,6 @@ public class LivroBean {
     public void setAutor(){
         Autor autor = new DAO<Autor>(Autor.class).getById(autorId);
         this.livro.addAutor(autor);
-        System.out.println("Autor: "+ autor.getName());
     }
 
     public  List<Autor> getAutoresDoLivro(){
@@ -67,5 +66,9 @@ public class LivroBean {
         if(!valor.startsWith("1")){
             throw  new ValidatorException(new FacesMessage("Deveria começa com 1"));
         }
+    }
+
+    public String formAutor(){
+        return "autor?faces-redirect=true";
     }
 }

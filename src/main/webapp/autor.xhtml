@@ -4,28 +4,35 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>Novo autor</title>
 </h:head>
-<h:body>
-    <h1>Novo autor</h1>
-    <h:form>
-        <fieldset>
-            <legend>Dados do autor</legend>
-            <h:panelGrid columns="3">
-                <h:outputLabel for="nome" value="Nome"/>
-                <h:inputText id="nome" value="#{autorBean.autor.name}" required="true"
-                             requiredMessage="Nome não informado"
-                             validatorMessage="Autor deve ter no minino 5 caracteres">
-                    <f:validateLength minimum="5"/>
-                </h:inputText>
-                <h:message for="nome"/>
-            </h:panelGrid>
-            <h:commandButton value="Gravar" action="#{autorBean.gravar}"/>
-        </fieldset>
-    </h:form>
-</h:body>
-
+<ui:composition template="_template.xhtml">
+    <ui:define name="title">
+        <h1>Novo autor</h1>
+    </ui:define>
+    <ui:define name="context">
+        <h:form>
+            <fieldset>
+                <legend>Dados do autor</legend>
+                <h:panelGrid columns="3">
+                    <h:outputLabel for="nome" value="Nome"/>
+                    <h:inputText id="nome" value="#{autorBean.autor.name}" required="true"
+                                 requiredMessage="Nome não informado"
+                                 validatorMessage="Autor deve ter no minino 5 caracteres">
+                        <f:validateLength minimum="5"/>
+                    </h:inputText>
+                    <h:message for="nome"/>
+                </h:panelGrid>
+                <h:commandButton value="Gravar" action="#{autorBean.gravar}"/>
+            </fieldset>
+        </h:form>
+    </ui:define>
+    <ui:define name="footer">
+        Cadastro de Autor
+    </ui:define>
+</ui:composition>
 </html>

@@ -21,8 +21,9 @@ public class AutorBean {
         return autor;
     }
 
-    public void gravar(){
+    public String gravar(){
         new DAO<Autor>(Autor.class).save(this.autor);
         this.autor = new Autor();
+        return "livro?faces-redirect=true";
     }
 }
