@@ -17,7 +17,7 @@ public class Livro {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataLancamento = Calendar.getInstance();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Autor> autors = new ArrayList<>();
 
     public Livro() {

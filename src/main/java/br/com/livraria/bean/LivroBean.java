@@ -20,7 +20,7 @@ public class LivroBean {
     private Livro livro;
     private Integer autorId;
 
-    public  LivroBean(){
+    public LivroBean() {
         this.livro = new Livro();
     }
 
@@ -36,39 +36,51 @@ public class LivroBean {
         this.autorId = autorId;
     }
 
-    public void setAutor(){
+    public void setAutor() {
         Autor autor = new DAO<Autor>(Autor.class).getById(autorId);
         this.livro.addAutor(autor);
     }
 
-    public  List<Autor> getAutoresDoLivro(){
-        return  this.livro.getAutors();
+    public List<Autor> getAutoresDoLivro() {
+        return this.livro.getAutors();
     }
 
-    public  List<Livro> getAllLivros(){
+    public List<Livro> getAllLivros() {
         return new DAO<Livro>(Livro.class).getAll();
     }
 
-    public void save(){
-        if(livro.getAutors().isEmpty()){
+    public void save() {
+        if (livro.getAutors().isEmpty()) {
             FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor"));
         }
-        new DAO<Livro>(Livro.class).save(livro);
-        this.livro = new Livro();
+        if (this.livro.getId() == null) {
+            new DAO<Livro>(Livro.class).save(livro);
+            this.livro = new Livro();
+        }else {
+            new DAO<Livro>(Livro.class).update(livro);
+        }
     }
 
-    public List<Autor> getAutores(){
-        return  new DAO<Autor>(Autor.class).getAll();
+    public List<Autor> getAutores() {
+        return new DAO<Autor>(Autor.class).getAll();
     }
 
     public void comecaComDigitoUm(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
         String valor = value.toString();
-        if(!valor.startsWith("1")){
-            throw  new ValidatorException(new FacesMessage("Deveria começa com 1"));
+        if (!valor.startsWith("1")) {
+            throw new ValidatorException(new FacesMessage("Deveria começa com 1"));
         }
     }
 
-    public String formAutor(){
+    public void remove(Livro livro) {
+        new DAO<Livro>(Livro.class).remove(livro);
+    }
+
+    public void carregar(Livro livro) {
+        this.livro = livro;
+    }
+
+    public String formAutor() {
         return "autor?faces-redirect=true";
     }
 }
