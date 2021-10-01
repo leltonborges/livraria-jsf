@@ -1,5 +1,6 @@
 package br.com.livraria.entity;
 
+import javax.faces.bean.ViewScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,11 +44,11 @@ public class Autor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Autor autor = (Autor) o;
-        return id.equals(autor.id);
+        return id.equals(autor.id) && name.equals(autor.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name);
     }
 }

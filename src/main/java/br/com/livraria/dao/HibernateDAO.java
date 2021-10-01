@@ -12,21 +12,4 @@ public class HibernateDAO {
         return factory.createEntityManager();
     }
 
-    protected static void getTransitaion(EntityManager manager) {
-        manager.getTransaction().begin();
-    }
-
-    protected static void getCommit(EntityManager manager) {
-        manager.getTransaction().commit();
-    }
-
-    protected static void closeManager(EntityManager manager) {
-        manager.close();
-    }
-
-    protected static void closeFactory() {
-        factory.close();
-    }
-
-
 }

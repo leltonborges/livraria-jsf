@@ -14,8 +14,10 @@ public class DAO<T> extends HibernateDAO {
     }
 
     public void save(T entity) {
+        if(entity == null) return;
+
         this.em = getManager();
-        getTransitaion(this.em);
+        beginTransitaion();
         this.em.persist(entity);
         commitAndClose();
     }
@@ -27,15 +29,19 @@ public class DAO<T> extends HibernateDAO {
     }
 
     public void remove(T entity) {
+        if(entity == null) return;
+
         this.em = getManager();
-        getTransitaion(this.em);
+        beginTransitaion();
         this.em.remove(this.em.merge(entity));
         commitAndClose();
     }
 
     public void update(T entity) {
+        if(entity == null) return;
+
         this.em = getManager();
-        getTransitaion(this.em);
+        beginTransitaion();
         this.em.merge(entity);
         commitAndClose();
     }
@@ -43,8 +49,8 @@ public class DAO<T> extends HibernateDAO {
     public T getById(Integer id) {
         this.em = getManager();
         T result = em.find(tClass, id);
-        closeManager(this.em);
-        return  result;
+        closeManager();
+        return result;
     }
 
     public List<T> getAll() {
@@ -53,13 +59,24 @@ public class DAO<T> extends HibernateDAO {
         CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(tClass);
         query.select(query.from(tClass));
         list = em.createQuery(query).getResultList();
-        closeManager(this.em);
+        closeManager();
         return list;
     }
 
     private void commitAndClose() {
-        this.getCommit(this.em);
-        this.closeManager(this.em);
+        this.commitTransitaion();
+        this.closeManager();
     }
 
+    private void beginTransitaion() {
+        this.em.getTransaction().begin();
+    }
+
+    private void commitTransitaion() {
+        this.em.getTransaction().commit();
+    }
+
+    private void closeManager() {
+        this.em.close();
+    }
 }

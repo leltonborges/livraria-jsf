@@ -4,8 +4,11 @@ import br.com.livraria.dao.DAO;
 import br.com.livraria.entity.Autor;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import java.util.List;
 
 @ManagedBean
+@ViewScoped
 public class AutorBean {
     private Autor autor;
 
@@ -21,9 +24,31 @@ public class AutorBean {
         return autor;
     }
 
-    public String gravar(){
-        new DAO<Autor>(Autor.class).save(this.autor);
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+
+    public String gravar() {
+
+        if (this.autor.getId() == null) {
+            new DAO<Autor>(Autor.class).save(this.autor);
+        } else {
+            new DAO<Autor>(Autor.class).update(this.autor);
+        }
+
         this.autor = new Autor();
         return "livro?faces-redirect=true";
+    }
+
+    public List<Autor> getAllAutores() {
+        return new DAO<Autor>(Autor.class).getAll();
+    }
+
+    public void carregar(Autor autor){
+        this.autor = autor;
+    }
+
+    public void removeAutor(Autor autor) {
+        new DAO<Autor>(Autor.class).remove(autor);
     }
 }

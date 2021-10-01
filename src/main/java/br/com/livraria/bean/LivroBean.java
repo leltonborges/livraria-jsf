@@ -3,6 +3,7 @@ package br.com.livraria.bean;
 import br.com.livraria.dao.DAO;
 import br.com.livraria.entity.Autor;
 import br.com.livraria.entity.Livro;
+import javassist.NotFoundException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -55,10 +56,10 @@ public class LivroBean {
         }
         if (this.livro.getId() == null) {
             new DAO<Livro>(Livro.class).save(livro);
-            this.livro = new Livro();
         }else {
             new DAO<Livro>(Livro.class).update(livro);
         }
+        this.livro = new Livro();
     }
 
     public List<Autor> getAutores() {
@@ -83,4 +84,13 @@ public class LivroBean {
     public String formAutor() {
         return "autor?faces-redirect=true";
     }
+
+    public void removeAutorDoLivro(Autor autor) {
+        this.livro.removeAutor(autor);
+    }
+
+    private Livro getLivroId(Livro livro){
+        return new DAO<Livro>(Livro.class).getById(livro.getId());
+    }
+
 }

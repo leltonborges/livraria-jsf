@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-BR" lang="pt-BR"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
@@ -23,8 +23,8 @@
                 <h:panelGrid columns="2">
                     <h:outputLabel for="titulo" value="Titulo:"/>
                     <h:inputText id="titulo" value="#{livroBean.livro.titulo}" required="true"
-                                 requiredMessage="Titulo obrigatÃ³rio"
-                                 validatorMessage="TÃ­tulo nÃ£o pode ser superior a 50 caracteres">
+                                 requiredMessage="Titulo obrigatório"
+                                 validatorMessage="Título não pode ser superior a 50 caracteres">
                         <f:validateLength maximum="50"/>
                         <f:ajax event="blur" render="messages"/>
                     </h:inputText>
@@ -33,14 +33,14 @@
                                  validator="#{livroBean.comecaComDigitoUm}">
                         <f:ajax event="keyup" render="messages"/>
                     </h:inputText>
-                    <h:outputLabel for="preco" value="PreÃ§o:"/>
+                    <h:outputLabel for="preco" value="Preço:"/>
                     <h:inputText id="preco" value="#{livroBean.livro.price}" required="true"
-                                 requiredMessage="Informe um valor de preÃ§o valido"
-                                 validatorMessage="O preÃ§o de deve ser maior que R$ 1 e Menor que R$ 1000">
+                                 requiredMessage="Informe um valor de preço valido"
+                                 validatorMessage="O preço de deve ser maior que R$ 1 e Menor que R$ 1000">
                         <f:validateDoubleRange minimum="1.0" maximum="1000.00"/>
                         <f:ajax event="blur" render="messages"/>
                     </h:inputText>
-                    <h:outputLabel for="data" value="Data de LanÃ§amento:"/>
+                    <h:outputLabel for="data" value="Data de Lançamento:"/>
                     <h:inputText id="data" value="#{livroBean.livro.dataLancamento.time}" rendered="true"
                                  requiredMessage="Data invalida dd/mm/yyyy HH:mm">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo"/>
@@ -65,18 +65,20 @@
                     <h:column>
                         <h:outputText value="#{autor.name}"/>
                     </h:column>
+                    <h:column>
+                        <h:commandLink value="remove" action="#{livroBean.removeAutorDoLivro(autor)}"/>
+                    </h:column>
                 </h:dataTable>
             </fieldset>
             <h:commandButton value="Gravar" action="#{livroBean.save}">
                 <f:ajax execute="@form" render="@form :formtablebooks:tabelaLivros"/>
             </h:commandButton>
         </h:form>
-
         <hr/>
         <h:form id="formtablebooks">
             <h:dataTable value="#{livroBean.allLivros}" var="livro" id="tabelaLivros">
                 <h:column>
-                    <f:facet name="header">TÃ­tulo</f:facet>
+                    <f:facet name="header">Título</f:facet>
                     <h:outputText value="#{livro.titulo}"/>
                 </h:column>
                 <h:column>
@@ -84,24 +86,24 @@
                     <h:outputText value="#{livro.isbn}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">PreÃ§o</f:facet>
+                    <f:facet name="header">Preço</f:facet>
                     <h:outputText value="#{livro.price}">
                         <f:convertNumber type="currency" pattern="R$ #0.00" currencySymbol="R$" locale="pt_BR"/>
                     </h:outputText>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Data de lanÃ§amento</f:facet>
+                    <f:facet name="header">Data de lançamento</f:facet>
                     <h:outputText value="#{livro.dataLancamento.time}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo"/>
                     </h:outputText>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Remover</f:facet>
-                    <h:commandLink value="remove" action="#{livroBean.remove(livro)}"/>
-                </h:column>
-                <h:column>
                     <f:facet name="header">Alterar</f:facet>
                     <h:commandLink value="alterar" action="#{livroBean.carregar(livro)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Remover</f:facet>
+                    <h:commandLink value="remove" action="#{livroBean.remove(livro)}"/>
                 </h:column>
             </h:dataTable>
         </h:form>

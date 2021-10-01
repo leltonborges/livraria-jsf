@@ -17,7 +17,7 @@ public class Livro {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataLancamento = Calendar.getInstance();
 
-    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Autor> autors = new ArrayList<>();
 
     public Livro() {
@@ -79,7 +79,13 @@ public class Livro {
     }
     public void addAllAutor(Autor... autors){
         for (Autor autor: autors){
-            this.addAutor(autor);
+            if(!this.autors.contains(autor)){
+                this.addAutor(autor);
+            }
         }
+    }
+
+    public void removeAutor(Autor autor){
+        this.autors.remove(autor);
     }
 }
