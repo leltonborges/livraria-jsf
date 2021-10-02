@@ -7,6 +7,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>br.com.livraria.entity.Autor</class>
         <class>br.com.livraria.entity.Livro</class>
+        <class>br.com.livraria.entity.Autor</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1/study?useSSL=false"/>

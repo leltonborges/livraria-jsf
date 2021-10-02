@@ -12,6 +12,10 @@
 </h:head>
 
 <ui:composition template="_template.xhtml">
+    <f:metadata>
+        <f:viewParam name="livroId" value="#{livroBean.livroId}"/>
+        <f:viewAction  action="#{livroBean.getLivroById}" if="#{param.livroId != null}"/>
+    </f:metadata>
     <ui:define name="title">
         <h1>Novo livro</h1>
     </ui:define>
@@ -37,6 +41,8 @@
                     <h:inputText id="preco" value="#{livroBean.livro.price}" required="true"
                                  requiredMessage="Informe um valor de preço valido"
                                  validatorMessage="O preço de deve ser maior que R$ 1 e Menor que R$ 1000">
+                        <f:passThroughAttribute name="type" value="number"/>
+                        <f:passThroughAttribute name="step" value="0.01"/>
                         <f:validateDoubleRange minimum="1.0" maximum="1000.00"/>
                         <f:ajax event="blur" render="messages"/>
                     </h:inputText>

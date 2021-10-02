@@ -3,6 +3,7 @@ package br.com.livraria.dao;
 import br.com.livraria.dao.DAO;
 import br.com.livraria.entity.Autor;
 import br.com.livraria.entity.Livro;
+import br.com.livraria.entity.User;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,11 +15,12 @@ import java.util.List;
 public class DB {
     public static void main(String[] args) {
         DAO<Livro> livrosDAO = new DAO<Livro>(Livro.class);
-        DAO<Autor> autorDao = new DAO<Autor>(Autor.class);
+        DAO<Autor> autorDAO = new DAO<Autor>(Autor.class);
+        DAO<User> userDAO = new DAO<User>(User.class);
 
-        Autor autor1 = new Autor(null, "Machado de assis", "test1@gmail.com");
-        Autor autor2 = new Autor(null, "Jorge Amado", null);
-        Autor autor3 = new Autor(null, "Paulo Coelho", "test@gmail.com");
+        Autor autor1 = new Autor(null, "Machado de assis", "assis@gmail.com");
+        Autor autor2 = new Autor(null, "Jorge Amado", "jorge@gmail.com");
+        Autor autor3 = new Autor(null, "Paulo Coelho", "paulo@gmail.com");
 
         List<Autor> autors = Arrays.asList(autor1, autor2, autor3);
 
@@ -41,8 +43,15 @@ public class DB {
 
         List<Livro> livros = Arrays.asList(livros1, livros2, livros3, livros4);
 
-        autorDao.saveAll(autors);
+        User user1 = new User(null, "bia@gmail.com", "123");
+        User user2 = new User(null, "alex@gmail.com", "123");
+        User user3 = new User(null, "ana@gmail.com", "123");
+        User user4 = new User(null, "lia@gmail.com", "123");
+        List<User> userList = Arrays.asList(user1, user2, user3, user4);
+
+        autorDAO.saveAll(autors);
         livrosDAO.saveAll(livros);
+        userDAO.saveAll(userList);
 
     }
     private static Calendar parseDate(String data){

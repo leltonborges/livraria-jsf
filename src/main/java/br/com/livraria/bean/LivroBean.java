@@ -18,6 +18,7 @@ import java.util.List;
 public class LivroBean {
     private Livro livro;
     private Integer autorId;
+    private Integer livroId;
 
     public LivroBean() {
         this.livro = new Livro();
@@ -33,6 +34,14 @@ public class LivroBean {
 
     public void setAutorId(Integer autorId) {
         this.autorId = autorId;
+    }
+
+    public Integer getLivroId() {
+        return livroId;
+    }
+
+    public void setLivroId(Integer livroId) {
+        this.livroId = livroId;
     }
 
     public void setAutor() {
@@ -61,10 +70,16 @@ public class LivroBean {
         }
         if (this.livro.getId() == null) {
             new DAO<Livro>(Livro.class).save(livro);
-        }else {
+        } else {
             new DAO<Livro>(Livro.class).update(livro);
         }
         this.livro = new Livro();
+    }
+
+    public void getLivroById() {
+        if (this.livroId == null) return;
+
+        this.livro = new DAO<Livro>(Livro.class).getById(this.livroId);
     }
 
     public List<Autor> getAutores() {
@@ -87,7 +102,7 @@ public class LivroBean {
         this.livro.removeAutor(autor);
     }
 
-    private Livro getLivroId(Livro livro){
+    private Livro getLivroId(Livro livro) {
         return new DAO<Livro>(Livro.class).getById(livro.getId());
     }
 

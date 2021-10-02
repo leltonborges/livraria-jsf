@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Livro {
@@ -89,5 +90,18 @@ public class Livro {
 
     public void removeAutor(Autor autor){
         this.autors.remove(autor);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return titulo.equals(livro.titulo) && isbn.equals(livro.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, isbn);
     }
 }

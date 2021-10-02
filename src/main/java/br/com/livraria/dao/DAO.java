@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class DAO<T> extends HibernateDAO {
-    private EntityManager em;
+    protected EntityManager em;
     private Class<T> tClass;
 
     public DAO(Class<T> tClass) {
