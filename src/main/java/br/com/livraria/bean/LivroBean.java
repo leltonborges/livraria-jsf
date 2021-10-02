@@ -3,7 +3,6 @@ package br.com.livraria.bean;
 import br.com.livraria.dao.DAO;
 import br.com.livraria.entity.Autor;
 import br.com.livraria.entity.Livro;
-import javassist.NotFoundException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,7 +10,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.xml.bind.ValidationException;
 import java.util.List;
 
 //@RequestScoped
@@ -42,6 +40,13 @@ public class LivroBean {
         this.livro.addAutor(autor);
     }
 
+    public void comecaComDigitoUm(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
+        String valor = value.toString();
+        if (!valor.startsWith("1")) {
+            throw new ValidatorException(new FacesMessage("Deveria começa com 1"));
+        }
+    }
+
     public List<Autor> getAutoresDoLivro() {
         return this.livro.getAutors();
     }
@@ -64,13 +69,6 @@ public class LivroBean {
 
     public List<Autor> getAutores() {
         return new DAO<Autor>(Autor.class).getAll();
-    }
-
-    public void comecaComDigitoUm(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
-        String valor = value.toString();
-        if (!valor.startsWith("1")) {
-            throw new ValidatorException(new FacesMessage("Deveria começa com 1"));
-        }
     }
 
     public void remove(Livro livro) {

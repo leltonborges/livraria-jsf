@@ -75,6 +75,8 @@ public class Livro {
     }
 
     public  void addAutor(Autor autor){
+        if(this.autors.contains(autor))return;
+
         this.autors.add(autor);
     }
     public void addAllAutor(Autor... autors){

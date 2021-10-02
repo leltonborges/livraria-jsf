@@ -16,9 +16,9 @@ public class DB {
         DAO<Livro> livrosDAO = new DAO<Livro>(Livro.class);
         DAO<Autor> autorDao = new DAO<Autor>(Autor.class);
 
-        Autor autor1 = new Autor(null, "Machado de assis");
-        Autor autor2 = new Autor(null, "Jorge Amado");
-        Autor autor3 = new Autor(null, "Paulo Coelho");
+        Autor autor1 = new Autor(null, "Machado de assis", "test1@gmail.com");
+        Autor autor2 = new Autor(null, "Jorge Amado", null);
+        Autor autor3 = new Autor(null, "Paulo Coelho", "test@gmail.com");
 
         List<Autor> autors = Arrays.asList(autor1, autor2, autor3);
 

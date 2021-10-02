@@ -11,6 +11,7 @@ import java.util.List;
 @ViewScoped
 public class AutorBean {
     private Autor autor;
+    private Integer autorId;
 
     public AutorBean() {
         this.autor = new Autor();
@@ -26,6 +27,14 @@ public class AutorBean {
 
     public void setAutor(Autor autor) {
         this.autor = autor;
+    }
+
+    public Integer getAutorId() {
+        return autorId;
+    }
+
+    public void setAutorId(Integer autorId) {
+        this.autorId = autorId;
     }
 
     public String gravar() {
@@ -50,5 +59,9 @@ public class AutorBean {
 
     public void removeAutor(Autor autor) {
         new DAO<Autor>(Autor.class).remove(autor);
+    }
+
+    public void carregarAutorId() {
+        this.autor = new DAO<Autor>(Autor.class).getById(this.autorId);
     }
 }
