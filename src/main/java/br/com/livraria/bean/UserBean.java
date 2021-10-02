@@ -35,4 +35,10 @@ public class UserBean {
         }
 
     }
+
+    public String signOut(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().remove("userIsLogin");
+        return "login?faces-redirect=true";
+    }
 }

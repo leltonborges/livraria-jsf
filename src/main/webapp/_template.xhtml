@@ -15,6 +15,17 @@
         <h1><ui:insert name="title"/></h1>
     </div>
     <div id="context">
+        <h:form id="loginSession" rendered="#{sessionScope['userIsLogin'] != null}">
+            <h:panelGrid columns="2">
+                <h:column>
+                    <h:outputLabel value="#{sessionScope['userIsLogin'].email}"/>
+                </h:column>
+                <h:column>
+                    <h:commandLink value="Sign Out" action="#{userBean.signOut}"/>
+                </h:column>
+            </h:panelGrid>
+        </h:form>
+        <hr/>
         <ui:insert name="context"/>
     </div>
     <div id="footer">
