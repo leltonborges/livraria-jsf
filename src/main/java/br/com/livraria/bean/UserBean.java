@@ -24,14 +24,15 @@ public class UserBean {
 
     public String login() {
         boolean isExist = new DAOUser(User.class).isExists(this.user);
+        FacesContext context = FacesContext.getCurrentInstance();
         if (isExist) {
-            FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().getSessionMap().put("userIsLogin", this.user);
             return "livro?faces-redirect=true";
         } else {
-            FacesContext.getCurrentInstance().addMessage("messages",
+            context.getExternalContext().getFlash().setKeepMessages(true); // menter a messagem em duas request
+            context.addMessage(null,
                     new FacesMessage("Usuario ou senha invalido"));
-            return "";
+            return "login?faces-redirect=true";
         }
 
     }
