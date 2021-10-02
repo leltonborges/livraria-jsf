@@ -10,6 +10,7 @@
 <ui:composition template="_template.xhtml">
     <ui:define name="title">Sign</ui:define>
     <ui:define name="context">
+        <h:messages id="messages"/>
         <h:form id="formLogin">
             <fieldset>
                 <h:panelGrid columns="3">
@@ -25,7 +26,9 @@
                                    value="#{userBean.user.pass}"
                                    requiredMessage="O campo não pode esta vazio" id="pass"/>
                     <h:message for="pass" id="messagePass"/>
-                    <h:commandButton value="Logar" action="#{userBean.login}"/>
+                    <h:commandButton value="Logar" action="#{userBean.login}">
+                        <f:ajax event="blur" render=":messages"/>
+                    </h:commandButton>
                 </h:panelGrid>
             </fieldset>
         </h:form>

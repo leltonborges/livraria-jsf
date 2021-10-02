@@ -2,6 +2,7 @@ package br.com.livraria.dao;
 
 import br.com.livraria.entity.User;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class DAOUser extends DAO<User> {
@@ -10,14 +11,18 @@ public class DAOUser extends DAO<User> {
     }
 
     public boolean isExists(User user) {
-        this.em = getManager();
-        User singleResult = this.em.createQuery("SELECT  U FROM User U " +
-                "WHERE U.email = :pEmail AND U.pass = :pPass", User.class)
-                .setParameter("pEmail", user.getEmail())
-                .setParameter("pPass", user.getPass())
-                .getSingleResult();
+        try {
+            this.em = getManager();
+            User singleResult = this.em.createQuery("SELECT  U FROM User U " +
+                            "WHERE U.email = :pEmail AND U.pass = :pPass", User.class)
+                    .setParameter("pEmail", user.getEmail())
+                    .setParameter("pPass", user.getPass())
+                    .getSingleResult();
 
-        this.em.close();
-        return singleResult != null;
+            this.em.close();
+            return true;
+        } catch (NoResultException e) {
+            return false;
+        }
     }
 }
