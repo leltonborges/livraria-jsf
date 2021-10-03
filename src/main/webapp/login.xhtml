@@ -20,12 +20,11 @@
                     <h:outputLabel value="Login:" for="login"/>
                     <p:inputText type="email" required="true"
                                  requiredMessage="Email não informado" id="login"
-                                 value="#{userBean.user.email}" validatorMessage="Email inválido">
-                        <f:passThroughAttribute name="placeholder" value="example@example.com"/>
+                                 value="#{userBean.user.email}" validatorMessage="Email inválido" placeholder="example@example.com">
                         <f:validateRegex pattern=".+@.+"/>
                     </p:inputText>
                     <p:message for="login" id="messageLogin"/>
-                    <p:outputLabel value="Password: " for="pass"/>
+                    <p:outputLabel value="Password:" for="pass"/>
                     <p:password id="pass" value="#{userBean.user.pass}" feedback="true"
                                 required="true" requiredMessage="O campo é obrigatório"
                                 promptLabel="Informe sua senha" weakLabel="Fraca"

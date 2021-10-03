@@ -52,7 +52,7 @@ public class LivroBean {
     public void comecaComDigitoUm(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
         String valor = value.toString();
         if (!valor.startsWith("1")) {
-            throw new ValidatorException(new FacesMessage("Deveria começa com 1"));
+            throw new ValidatorException(new FacesMessage("Deveria ISBN começa com 1"));
         }
     }
 
