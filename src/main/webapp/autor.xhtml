@@ -53,7 +53,7 @@
                 <f:facet name="header">Autores</f:facet>
                 <p:commandLink styleClass="fa fa-fw fa-pencil" process="@this" update=":cadastroAutor"
                                style="float: left; margin-right: 10px" action="#{autorBean.carregar(autor)}"/>
-                <p:commandLink styleClass="fa fa-fw fa-trash" process="@this" update=":formTableAutores"
+                <p:commandLink styleClass="fa fa-fw fa-trash-o" process="@this" update=":formTableAutores"
                                style="float: left;margin-right: 10px" action="#{autorBean.removeAutor(autor)}"/>
                 #{autor.name} - #{autor.email}
             </p:dataList>

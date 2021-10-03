@@ -81,36 +81,40 @@
         </h:form>
         <hr/>
         <h:form id="formtablebooks">
-            <h:dataTable value="#{livroBean.allLivros}" var="livro" id="tabelaLivros">
-                <h:column>
-                    <f:facet name="header">Título</f:facet>
+            <p:dataTable value="#{livroBean.allLivros}" var="livro" id="tabelaLivros"
+                         rows="5" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,20,50,{ShowAll|'All'}">
+                <f:facet name="header">Livros</f:facet>
+                <p:column headerText="Titulo" sortBy="#{livro.titulo}"
+                          filterBy="#{livro.titulo}" filterMatchMode="startsWith">
                     <h:outputText value="#{livro.titulo}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">ISBN</f:facet>
+                </p:column>
+                <p:column headerText="ISBN" sortBy="#{livro.isbn}"
+                          filterBy="#{livro.isbn}" filterMatchMode="startWith">
                     <h:outputText value="#{livro.isbn}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Preço</f:facet>
+                </p:column>
+                <p:column headerText="Preço" sortBy="#{livro.price}"
+                          filterBy="#{livro.price}" filterMatchMode="startWith">
                     <h:outputText value="#{livro.price}">
                         <f:convertNumber type="currency" pattern="R$ #0.00" currencySymbol="R$" locale="pt_BR"/>
                     </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Data de lançamento</f:facet>
+                </p:column>
+                <p:column headerText="Data de lançamento" sortBy="#{livro.dataLancamento}"
+                          filterBy="#{livro.dataLancamento}" filterMatchMode="startWith">
                     <h:outputText value="#{livro.dataLancamento.time}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo"/>
                     </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Alterar</f:facet>
+                </p:column>
+                <p:column headerText="Alterar">
                     <h:commandLink value="alterar" action="#{livroBean.carregar(livro)}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Remover</f:facet>
+                </p:column>
+                <p:column headerText="Remover">
                     <h:commandLink value="remove" action="#{livroBean.remove(livro)}"/>
-                </h:column>
-            </h:dataTable>
+                </p:column>
+            </p:dataTable>
+            <hr/>
         </h:form>
     </ui:define>
     <ui:define name="footer">

@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import java.util.ArrayList;
 import java.util.List;
 
 //@RequestScoped
@@ -19,6 +20,8 @@ public class LivroBean {
     private Livro livro;
     private Integer autorId;
     private Integer livroId;
+
+    private List<Livro> livroList;
 
     public LivroBean() {
         this.livro = new Livro();
@@ -61,18 +64,25 @@ public class LivroBean {
     }
 
     public List<Livro> getAllLivros() {
-        return new DAO<Livro>(Livro.class).getAll();
+        DAO<Livro> livroDAO = new DAO<>(Livro.class);
+        if (livroList == null) {
+            this.livroList = livroDAO.getAll();
+        }
+        return livroList;
     }
 
     public void save() {
+        DAO<Livro> livroDAO = new DAO<>(Livro.class);
+
         if (livro.getAutors().isEmpty()) {
             FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor"));
         }
         if (this.livro.getId() == null) {
-            new DAO<Livro>(Livro.class).save(livro);
+            livroDAO.save(livro);
         } else {
-            new DAO<Livro>(Livro.class).update(livro);
+            livroDAO.update(livro);
         }
+        livroList = livroDAO.getAll();
         this.livro = new Livro();
     }
 
@@ -87,7 +97,9 @@ public class LivroBean {
     }
 
     public void remove(Livro livro) {
-        new DAO<Livro>(Livro.class).remove(livro);
+        DAO<Livro> livroDAO = new DAO<>(Livro.class);
+        livroDAO.remove(livro);
+        livroList = livroDAO.getAll();
     }
 
     public void carregar(Livro livro) {

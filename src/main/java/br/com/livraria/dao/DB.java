@@ -51,7 +51,7 @@ public class DB {
 
         autorDAO.saveAll(autors);
         livrosDAO.saveAll(livros);
-        userDAO.saveAll(userList);
+//        userDAO.saveAll(userList);
 
     }
     private static Calendar parseDate(String data){
