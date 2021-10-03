@@ -4,14 +4,15 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head/>
 
 <h:body>
     <div id="header">
         <h:graphicImage library="img" name="logo-web.png"/>
-        <h1><ui:insert name="title"/></h1>
+        <ui:insert name="title"/>
     </div>
     <div id="context">
         <h:form id="loginSession" rendered="#{sessionScope['userIsLogin'] != null}">
@@ -20,7 +21,7 @@
                     <h:outputLabel value="#{sessionScope['userIsLogin'].email}"/>
                 </h:column>
                 <h:column>
-                    <h:commandLink value="Sign Out" action="#{userBean.signOut}"/>
+                    <p:commandLink value="Sign Out" action="#{userBean.signOut}" update="@form" process="@form"/>
                 </h:column>
             </h:panelGrid>
         </h:form>
