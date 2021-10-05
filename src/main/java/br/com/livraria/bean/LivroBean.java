@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 //@RequestScoped
 @ManagedBean
@@ -118,4 +119,25 @@ public class LivroBean {
         return new DAO<Livro>(Livro.class).getById(livro.getId());
     }
 
+    public boolean precoEhMenor(Object valorColuma, Object filtrodigitado, Locale locale) {
+        String txtdigitado = (filtrodigitado == null) ? null : filtrodigitado.toString().trim();
+
+        System.out.println("Filtrando pelo " + txtdigitado + ", valor: " + valorColuma);
+        if (txtdigitado == null || txtdigitado.equals("")) {
+            return true;
+        }
+        if (valorColuma == null) {
+            return false;
+        }
+        try{
+            Double precoDigitado = Double.parseDouble(txtdigitado);
+            Double precoColuna = (Double) valorColuma;
+
+            return precoColuna.compareTo(precoDigitado) < 0;
+        }catch (NumberFormatException e){
+
+            return  false;
+        }
+
+    }
 }
