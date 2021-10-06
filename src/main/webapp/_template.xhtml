@@ -19,26 +19,21 @@
         <ui:insert name="title"/>
     </div>
     <div id="context">
-        <div class="card" id="menu">
-<!--            <p:tabMenu activeIndex="#{param.i}" rendered="#{sessionScope['userIsLogin'] != null}">-->
-            <p:tabMenu activeIndex="#{param.i}">
-                <p:menuitem value="Livro" outcome="/livro" icon="pi pi-fw pi-home">
-                    <f:param name="i" value="0"/>
-                </p:menuitem>
-                <p:menuitem value="Autor" outcome="autor" icon="pi pi-fw pi-calendar">
-                    <f:param name="i" value="1"/>
-                </p:menuitem>
-            </p:tabMenu>
-        </div>
         <h:form id="loginSession" rendered="#{sessionScope['userIsLogin'] != null}">
-            <h:panelGrid columns="2">
-                <h:column>
-                    <h:outputLabel value="#{sessionScope['userIsLogin'].email}"/>
-                </h:column>
-                <h:column>
-                    <p:commandLink value="Sign Out" action="#{userBean.signOut}" update="@form" process="@form"/>
-                </h:column>
-            </h:panelGrid>
+            <div class="card" id="menu">
+                <p:tabMenu activeIndex="#{param.i}">
+                    <p:menuitem value="Livros" outcome="livro?faces-redirect=true" icon="pi pi-fw pi-home">
+                        <f:param name="i" value="0"/>
+                    </p:menuitem>
+                    <p:menuitem value="Autores" outcome="autor?faces-redirect=true" icon="pi pi-fw pi-pencil">
+                        <f:param value="1" name="i"/>
+                    </p:menuitem>
+                    <p:menuitem value="Logout" action="#{userBean.signOut}"
+                                update="@all" process="@all" icon="pi pi-fw pi-calendar">
+                    </p:menuitem>
+                    <p:menuitem value="#{sessionScope['userIsLogin'].email}"/>
+                </p:tabMenu>
+            </div>
         </h:form>
         <ui:insert name="context"/>
     </div>

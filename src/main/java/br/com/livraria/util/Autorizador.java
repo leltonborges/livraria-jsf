@@ -16,15 +16,14 @@ public class Autorizador implements PhaseListener {
         if (view.equals("/login.xhtml")) {
             return;
         }
-        return; //remover depois
-//        User userIsLogin = (User) context.getExternalContext().getSessionMap().get("userIsLogin");
-//        if (userIsLogin != null) {
-//            return;
-//        } else {
-//            NavigationHandler handler = context.getApplication().getNavigationHandler();
-//            handler.handleNavigation(context, null, "/login?faces-redirect=true");
-//            context.renderResponse();
-//        }
+        User userIsLogin = (User) context.getExternalContext().getSessionMap().get("userIsLogin");
+        if (userIsLogin != null) {
+            return;
+        } else {
+            NavigationHandler handler = context.getApplication().getNavigationHandler();
+            handler.handleNavigation(context, null, "/login?faces-redirect=true");
+            context.renderResponse();
+        }
     }
 
     @Override
