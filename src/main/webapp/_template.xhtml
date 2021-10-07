@@ -12,7 +12,16 @@
 
 <h:body>
     <div id="header">
-        <h:graphicImage library="img" name="logo-web.png"/>
+        <h:panelGrid columns="2" >
+            <h:graphicImage library="img" name="logo-web.png"/>
+            <h:form style="position: absolute; right: 10px;">
+                <p:themeSwitcher id="basic" value="#{themeBean.theme}" style="min-width:165px">
+                    <f:selectItem itemLabel="Altere o tema" itemValue=""/>
+                    <f:selectItems value="#{themeBean.themes}" var="tema" itemLabel="#{tema}" itemValue="#{tema}" />
+                    <f:ajax/>
+                </p:themeSwitcher>
+            </h:form>
+        </h:panelGrid>
         <p:growl showDetail="true">
             <p:autoUpdate/>
         </p:growl>
