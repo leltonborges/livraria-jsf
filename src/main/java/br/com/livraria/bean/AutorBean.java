@@ -5,11 +5,13 @@ import br.com.livraria.entity.Autor;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
 @ViewScoped
-public class AutorBean {
+public class AutorBean implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Autor autor;
     private Integer autorId;
 
